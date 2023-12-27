@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+	<h1> list p=16f877a </h1>
+	<h1> #include<p16f877a.inc> </h1>
+
+	<h1>	org 0x00  </h1>
+	<h1>	goto MAIN  </h1> 
+
+
+	<h1>	ORG 0x50 </h1>
+<h1>	MAPPING:</h1>
+  <h1>	  ADDWF PCL,F      </h1>
+   <h1>	 RETLW    0XC0; </h1>
+  <h1>  	RETLW    0xF9;</h1>
+  <h1> 	 RETLW    0xA4</h1>
+  <h1> 	 RETLW    0xB0</h1>
+  <h1> 	 RETLW    0x99</h1>
+  <h1> 	 RETLW    0x92</h1>
+   <h1>	 RETLW    0x82</h1>
+  <h1>  	RETLW    0xF8</h1>
+   <h1>	 RETLW    0x80</h1>
+ <h1>  	 RETLW    0x90</h1>
+<h1>                          </h1>
+	</h1>	ORG	0X500</h1>
+<h1>	MAIN: </h1>
+<h1>		BSF STATUS, RP0   </h1>   
+  <h1>  	MOVLW b'00111100'  </h1>
+  <h1> 	 MOVWF OPTION_REG</h1>
+   <h1> 	Movlw b'11111111'</h1>
+   <h1> 	MOVWF TRISA;   RA4 input</h1>
+<h1>		movlw b'00000000'</h1>
+<h1>		movwf TRISB</h1>
+<h1>		movwf TRISD</h1>
+  <h1>  		BCF STATUS, RP0  </h1>
+<h1>		movwf PORTD</h1>
+<h1>		movwf PORTB</h1>
+<h1>		movlw 0x00</h1>
+<h1>		movwf 0x22  	</h1> 
+<h1>	CLEART:	 
+<h1>		movlw 0x00      </h1>   
+ <h1>  	 MOVWF TMR0</h1>
+<h1>		movwf 0x21</h1>
+<h1></h1>
+<h1>	</h1>
+<h1>	Loop:</h1>
+<h1>		movf TMR0,W</h1>
+<h1>		movwf 0x21</h1>
+<h1>		call DISPLAY</h1>
+<h1>		bcf STATUS,Z</h1>
+<h1>		movlw b'01100100'</h1>
+<h1>		subwf TMR0,W</h1>
+<h1>		BTFSC STATUS,Z</h1>
+<h1>		goto CLEART</h1>
+<h1>		GOTO	Loop</h1>
+<h1>              </h1>
+<h1>	DISPLAY:</h1>
+<h1>		movlw b'00001010'</h1>
+<h1>		subwf 0x21,F</h1>
+<h1>		movlw b'00000001'</h1>
+<h1>		btfss 0x21,7</h1>
+<h1>		addwf 0x22,F</h1>
+<h1>		btfss 0x21,7</h1>
+<h1>		goto DISPLAY</h1>
+<h1>		movlw b'00001010'</h1>
+<h1>		addwf 0x21,F</h1>
+<h1>		movf  0x21,W</h1>
+<h1>		call  MAPPING</h1>
+<h1>		movwf PORTB</h1>
+<h1>		movf  0x22,W</h1>
+<h1>		call  MAPPING	</h1>
+<h1>		movwf PORTD</h1>
+<h1>		movlw 0x00 </h1>
+<h1>		movwf 0x22</h1>
+<h1>		RETURN</h1>
+<h1>      </h1>
+<h1>          </h1>
+<h1>	END		</h1>	
+</body>
+</html>
